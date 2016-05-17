@@ -54,10 +54,10 @@ gulp.task('firefox', ['build_firefox'], function () {
 
 
 gulp.task('build_safari', function (done) {
-    rmrf('build/safari', function () {
+    rmrf('build/messages.safariextension', function () {
         gulp.src(['safari/**', 'shared/**'])
             .pipe(debug())
-            .pipe(gulp.dest('build/safari'))
+            .pipe(gulp.dest('build/messages.safariextension'))
             .on('end', done);
     });
 });
@@ -71,7 +71,7 @@ gulp.task('safari', ['build_safari'], function () {
         return;
     }
 
-    return safariextz(path.join(__dirname, 'build/messages.safariextz'), path.join(__dirname, 'build/safari'), {
+    return safariextz(path.join(__dirname, 'build/messages.safariextz'), path.join(__dirname, 'build/messages.safariextension'), {
         privateKey:   path.join(__dirname, 'keys/safari.pem'),
         extensionCer: path.join(__dirname, 'keys/dev.pem'),
         appleDevCer:  path.join(__dirname, 'keys/apple-dev.pem'),
