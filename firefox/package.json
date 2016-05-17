@@ -1,0 +1,9 @@
+{
+  "name": "messaging",
+  "title": "Browser extensions messaging sample",
+  "id": "messaging@avast.com",
+  "description": "",
+  "author": "http://www.avast.com",
+  "version": "1.0.0",
+  "main": "bg.js"
+}

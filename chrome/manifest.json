@@ -1,0 +1,35 @@
+{
+  "name": "Browser extensions messaging sample",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "",
+  "homepage_url": "http://www.avast.com",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "<all_urls>",
+    "declarativeContent"
+  ],
+  "background": {
+    "scripts": [
+      "bg.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*"
+      ],
+      "all_frames": true,
+      "js": [
+        "log.js",
+        "message.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
