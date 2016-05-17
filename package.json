@@ -9,6 +9,7 @@
     "firefox-xpi": "^1.1.0",
     "gulp": "^3.9.1",
     "gulp-debug": "^2.1.2",
+    "rimraf": "^2.5.2",
     "safariextz": "^2.0.2"
   }
 }
