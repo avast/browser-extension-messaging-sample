@@ -4,7 +4,13 @@
     var MAX_WAIT = 300000; // 5 min
 
     function extensionMessage(type, request, callback) {
-        var e = { detail: request };
+        if (typeof request == 'function') {
+            callback = request;
+            request = null;
+        }
+
+        var id = Math.floor(Math.random() * 4096);
+        var e = { detail: request, id: id };
 
         if (callback) {
             var timeoutId;
@@ -26,14 +32,16 @@
 
             safari.self.addEventListener("message", replyListener);
         }
+
+        log(type, request, id);
         safari.self.tab.dispatchMessage(type, e);
     }
 
     var handlers = {};
 
     safari.self.addEventListener("message", function (msg) {
-        if (msg && msg.type && handlers[msg.type]) {
-            handlers[msg.type](msg.detail, msg.id);
+        if (msg && msg.name && handlers[msg.name]) {
+            handlers[msg.name](msg.message.detail, msg.message.id);
         }
     });
 
@@ -47,6 +55,6 @@
         handlers[type] = callback;
     }
 
-    window.extensionMessage = function () { };//extensionMessage;
-    window.addExtensionMessageListener = function () { };//addExtensionMessageListener;
+    window.extensionMessage = extensionMessage;
+    window.addExtensionMessageListener = addExtensionMessageListener;
 })();

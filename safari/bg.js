@@ -2,22 +2,21 @@
     var handlers = {
         'ping': function (request, msgid, sender, callback) {
             callback({ pong: msgid, id: msgid });
-        }//,
+        },
 
-        //'setTimeout': function (request, msgid, sender, callback) {
-        //    setTimeout(function () {
-        //        chrome.tabs.sendMessage(sender.tab.id, { type: 'timeout', id: msgid });
-        //    }, request);
-        //}
+        'setTimeout': function (request, msgid, sender, callback) {
+            setTimeout(function () {
+                sender.page.dispatchMessage('timeout', { id: msgid });
+            }, request);
+        }
     };
 
     safari.application.addEventListener("message", function (msg) {
-
-        if (!msg.type) {
+        if (!msg.name) {
             return;
         }
 
-        var handler = handlers[msg.type];
+        var handler = handlers[msg.name];
 
         if (!handler) {
             return;
