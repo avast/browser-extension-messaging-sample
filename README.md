@@ -38,4 +38,8 @@ It's possible to generate packages if you place your private keys as
 Test
 ----
 
-Open a page in the 'html' directory
+Open a page in the 'html' directory. Safari wants an http protocol, use e.g.
+
+    cd html
+    sudo python -m SimpleHTTPServer 80
+  
